@@ -112,7 +112,7 @@ async function getsongs(folder) {
 }
 
 async function displayAblums(){
-    let a = await fetch("https://online-music-player-rosy.vercel.app/songs/")
+    let a = await fetch("/songs/")
     let response = await a.text();
     let div=document.createElement("div")
     div.innerHTML=response
@@ -128,7 +128,7 @@ async function displayAblums(){
                 continue
             }
             let folder=e.href.split("/").slice(-1)[0]
-            let a = await fetch(`https://online-music-player-rosy.vercel.app/songs/${folder}/info.json`)
+            let a = await fetch(`/songs/${folder}/info.json`)
             let response = await a.json()
             cardcontainer.innerHTML+=
             `<div class="card" data-folder=${folder}>
