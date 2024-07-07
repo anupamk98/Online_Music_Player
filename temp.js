@@ -112,7 +112,7 @@ async function getsongs(folder) {
 }
 
 async function displayAblums(){
-    let a = await fetch("/songs/")
+    let a = await fetch("/songs")
     let response = await a.text();
     let div=document.createElement("div")
     div.innerHTML=response
