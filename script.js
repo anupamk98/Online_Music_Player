@@ -25,7 +25,7 @@ const playMusic=(track,song,artist)=>{
 
 async function getsongs(folder) {
     current_folder=folder;
-    let a= await fetch(`http://127.0.0.1:5500/${current_folder}`);
+    let a= await fetch(`https://online-music-player-rosy.vercel.app/${current_folder}`);
     let response = await a.text();
     let div=document.createElement("div");
     div.innerHTML=response;
