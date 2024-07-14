@@ -18,7 +18,7 @@ const playMusic=(track,song,artist)=>{
 
 async function getsongs(folder) {
     current_folder=folder;
-    let a= await fetch(`/${current_folder}`);
+    let a= await fetch(`http://127.0.0.1:5500/${current_folder}`);
     let response = await a.text();
     let div=document.createElement("div");
     div.innerHTML=response;
@@ -112,8 +112,9 @@ async function getsongs(folder) {
 }
 
 async function displayAblums(){
-    let a = await fetch("/songs/")
+    let a = await fetch("http://127.0.0.1:5500/songs/")
     let response = await a.text();
+    console.log(response)
     let div=document.createElement("div")
     div.innerHTML=response
     let cardcontainer=document.querySelector(".card-container")
@@ -128,18 +129,8 @@ async function displayAblums(){
                 continue
             }
             let folder=e.href.split("/").slice(-1)[0]
-            let a = await fetch(`/songs/${folder}/info.json`)
+            let a = await fetch(`http://127.0.0.1:5500/songs/${folder}/info.json`)
             let response = await a.json()
-            cardcontainer.innerHTML+=
-            `<div class="card" data-folder=${folder}>
-            <svg width="50" class="play-btn" height="50" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="25" cy="25" r="20" fill="#1fdf64"/>
-                <polygon points="20,17 20,33 33,25" fill="black"/>
-              </svg>                                                                                                                              
-            <img src="songs/${folder}/cover.jpg" alt="cover">
-            <h2>${response.title}</h2>
-            <p>${response.description}</p>
-        </div>`
         }
         Array.from(document.getElementsByClassName("card")).forEach(e=>{
             e.addEventListener("click",async ev=>{
